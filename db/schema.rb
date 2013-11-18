@@ -11,12 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131117093458) do
-
-  create_table "followers", force: true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
+ActiveRecord::Schema.define(version: 20131118093729) do
 
   create_table "posts", force: true do |t|
     t.text     "body"
@@ -24,6 +19,8 @@ ActiveRecord::Schema.define(version: 20131117093458) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "posts", ["user_id"], name: "index_posts_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "name"

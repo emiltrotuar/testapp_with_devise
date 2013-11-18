@@ -1,4 +1,4 @@
 json.array!(@posts) do |post|
-  json.extract! post, :body
+  json.extract! post, :body, :user_id
   json.url post_url(post, format: :json)
 end
