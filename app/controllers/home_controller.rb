@@ -3,7 +3,14 @@ class HomeController < ApplicationController
 	
 	def index
 		@posts = current_user.posts
-		@followed_posts = current_user.followed.posts
+		@followed_users = current_user.followed_users.load
 	end
 
+	def followed_users
+		@followed_users = current_user.followed_users
+	end
+
+	def following_users
+		@following_users = current_user.following_users
+	end
 end
