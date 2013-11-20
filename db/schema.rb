@@ -11,10 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131119110626) do
+ActiveRecord::Schema.define(version: 20131120092349) do
 
   create_table "followed_users_users", id: false, force: true do |t|
-    t.integer "user_id",           null: false
+    t.integer "user_id",          null: false
     t.integer "followed_user_id", null: false
   end
 
@@ -60,8 +60,6 @@ ActiveRecord::Schema.define(version: 20131119110626) do
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
     t.string   "last_sign_in_ip"
-    t.string   "following_user_id"
-    t.string   "followed_user_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
