@@ -1,20 +1,24 @@
 class RelationshipsController < ApplicationController
-	before_filter :authenticate_user!
 
   def follow
-  	@user = User.find(post_params[:id])
-  	current_user.following_users.add @user
-  	if @user
-  		format.html { redirect_to action: 'index', controller: :home }
-  		format.json { render action: 'show', status: :created, location: @user }
-  	else
-  		format.html { render action: 'new' }
-  		format.json { render json: @user.errors, status: :unprocessable_entity }
-  	end
-
+  	user = User.find(params[:id])
+    followed = current_user.followed_users
+    following = user.following_users
+    unless followed.find_by_id(user.id)
+     followed << user
+     following << current_user
+    end
+    redirect_to :back
   end
 
   def unfollow
-
+    user = User.find(params[:id])
+    followed = current_user.followed_users
+    following = user.following_users
+    if followed.find_by_id(user.id)
+      followed.delete(user)
+      following.delete(current_user)
+    end
+    redirect_to :back
   end
 end

@@ -12,20 +12,36 @@
 
   <tbody>
     <% @users.each do |user| %>
+      <% if user != current_user %>
       <tr>
         <td><%= user.name %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
-        <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.admin? %>
+          <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
         <td>
-         <!--  <form action="/follow", method="post">
-            <input type="submit" value="Follow">
-          </form> -->
-          <%= form_for user, action: '/follow' do |f| %>
-            <%= f.submit 'Follow' %>
-          <% end %>
+          <form accept-charset="UTF-8" action="/follow" method="post">
+            <div style="margin:0;padding:0;display:inline">
+              <input name="id" type="hidden" value="<%= user.id %>">
+              <input name="utf8" type="hidden" value="✓">
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            </div>
+            <input name="commit" type="submit" value="Follow">
+          </form>
+        </td>
+        <td>
+          <form accept-charset="UTF-8" action="/unfollow" method="post">
+            <div style="margin:0;padding:0;display:inline">
+              <input name="id" type="hidden" value="<%= user.id %>">
+              <input name="utf8" type="hidden" value="✓">
+              <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+            </div>
+            <input name="commit" type="submit" value="Unfollow">
+          </form>
         </td>
       </tr>
+      <% end %>
     <% end %>
   </tbody>
 </table>

@@ -1,4 +1,4 @@
-class CreateFollowingJoinTable < ActiveRecord::Migration
+class CreateFollowersJoinTable < ActiveRecord::Migration
   def change
     create_join_table :users, :following_users do |t|
       # t.index [:user_id, :following_user_id]
