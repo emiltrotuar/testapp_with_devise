@@ -1,8 +1,12 @@
 TestappWithDevise::Application.routes.draw do
   
+  resources :images
+
   devise_for :users
-  resources :posts
+
   resources :users
+  resources :posts
+  resources :images
 
   root to: "home#index"
   post 'follow', to: 'relationships#follow'
