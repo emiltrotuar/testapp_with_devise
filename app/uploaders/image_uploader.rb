@@ -49,7 +49,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   def store_dir
-    'public/images'
+    'assets/images'
   end
 
 end
